@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prototipando Login</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- tag semântica de cabeçalho -->
+    <header>
+        <h3>Página login</h3>
+      <button onclick="window.location.href='index.html'">Home</button>
+    </header>
+
+    <!-- tag semÂntica para organização do conteúdo do site -->
+    <main>
+      <!-- Primeira seção do conteúdo -->
+      <section>
+        <img src="senaisplogo.png" alt="logo_senai" />
+      </section>
+
+      <section>
+          <form method="post">
+              <h2>Login</h2>
+              <br>
+              <label for="user_name">Usuário</label>
+              <input type="text" name="user_name" id="user_name">
+                <br><br>
+              <label for="senha">Senha</label>
+              <input type="password" name="senha" id="senha">
+
+            <input type="submit" value="Enviar">
+            </section>
+        </form>
+    </main>
+
+    <footer>
+      <p>Desenvolvido por: Negrijo</p>
+    </footer>
+  </body>
+</html>
