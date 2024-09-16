@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+/* seletor universal */
+*{
+    background-color: #a2a2a2;
+    color: whitesmoke;
+}
+
+/* estilização por tag */
+h1 {
+    background-color: lightgray;
+    color: black;
+}
+
+/* Estilização por classe */
+.titulo {
+    background-color: green;
+    color: yellow;
+}
+
+/* Estilização por id */
+#destaque {
+    background-color: blueviolet;
+    color: beige;
+}
