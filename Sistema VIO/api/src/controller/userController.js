@@ -51,6 +51,17 @@ module.exports = class userController {
     return res.status(200).json({ message: "Obtendo todos os usuários" });
   }
 
+
+
+
+
+
+
+
+
+  
+
+
   static async updateUser(req, res) {
     //Desestrutura e recupera os dados enviados via corpo da requisição
     const { cpf, email, password, name } = req.body;

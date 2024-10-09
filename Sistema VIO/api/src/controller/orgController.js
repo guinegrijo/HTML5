@@ -1,5 +1,4 @@
-let organizador = [];
-let id = 0;
+const connect = require('../db/connect')
 
 module.exports = class orgController {
   static async createOrg(req, res) {
@@ -23,32 +22,35 @@ module.exports = class orgController {
     else if (!email.includes("@")) {
       return res.status(400).json({ error: "Email inválido. Deve conter @." });
 
-    } // Check se o email é único
-    const existingOrg = organizador.find((org) => org.email === email);
-    if (existingOrg) {
-      return res.status(400).json({ error: "Email já cadastrado." });
+    } else {
+
+       const query = `INSERT INTO organizador (nome, email, senha, telefone) VALUES ('${nome}', '${email}', '${senha}', '${telefone}')`
+
+       //executando a query  criada
+      try {
+        connect.query(query, function(err, results){
+          if (err){
+
+            console.log(err)
+            console.log(err.code)
+
+            if (err.code === 'ER_DUP_ENTRY'){
+              return res.status(400).json({error: "O E-mail já está vinculado a outro usuário"})
+            } else {
+              return res.status(500).json({error: "Erro interno no servidor"})
+            }
+
+          } else {
+            return res.status(201).json({message:"Organizador criado com sucesso"})
+          }
+
+        })
+      } catch (error) {
+        console.error(error)
+        res.status(500).json({error:"Erro interno do servidor"})
+      }
     }
-
-    // Aumenta o id em cada novo usuário cadastrado
-    id++;
-
-    // Procura um usuario com o mesmo valor do id, caso exista adciona 1 e procura denovo
-    while(true){
-        const existingId = organizador.find((org) => org.id === id);
-        if (!existingId){
-            break;
-        }
-        id++;
-    }
-
-    // Estrutura o novo Organizador
-    const newOrg = { id, nome, email, senha, telefone };
-
-    // Adciona o Organizador ao Array
-    organizador.push(newOrg);
-    return res
-      .status(201)
-      .json({ message: "Organizador criado com sucesso.", user: newOrg });
+    
   }
 
   static async getAllOrg(req, res) {
@@ -56,6 +58,12 @@ module.exports = class orgController {
     .status(200)
     .json({ message: "Exibindo todos os organizadores.", organizador });
   }
+
+
+
+
+
+
 
   static async updateOrg(req, res) {
     //Desestrutura e recupera os dados enviados via corpo da requisição
