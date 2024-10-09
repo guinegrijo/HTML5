@@ -1,6 +1,7 @@
 document
   .getElementById("formulario_registro")
   .addEventListener("submit", function (event) {
+    
     event.preventDefault();
 
     const name = document.getElementById("nome").value
@@ -37,7 +38,8 @@ document
       .then((data) => {
         // Executa a resposta de sucesso
 
-        alert("Usuário cadastrado com sucesso " + data.user.name);
+        // alert("Usuário cadastrado com sucesso " + data.user.name);
+        alert(data.message)
 
         console.log("usuario criado: ", data.user);
 
