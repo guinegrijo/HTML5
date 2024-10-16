@@ -48,19 +48,21 @@ module.exports = class userController {
   }
 
   static async getAllUsers(req, res) {
-    return res.status(200).json({ message: "Obtendo todos os usuários" });
+    const query = 'SELECT * FROM usuario'
+
+    try {
+      connect.query(query, function(err, results){
+        if(err) {
+          console.error(err)
+          return res.status(500).json({message: "Erro interno no servidor"})
+        }
+        return res.status(200).json({message: "Lista de usuários: ", users: results})
+      })
+    } catch(error) {
+      console.error("Erro ao executar consulta: ", error)
+      return res.status(500).json({error: "Erro interno do servidor"})
+    }
   }
-
-
-
-
-
-
-
-
-
-  
-
 
   static async updateUser(req, res) {
     //Desestrutura e recupera os dados enviados via corpo da requisição
