@@ -114,3 +114,15 @@ footer {
   position: absolute; /* Posiciona o rodapé de forma absoluta */
   bottom: 0; /* Posiciona o rodapé na parte inferior da página */
 }
+
+
+#user-list li {
+  list-style-type: none;
+  margin-bottom: 10px;
+  width: 100%;
+  background-color: pink;
+  text-align: center;
+  font-size: 18px;
+  color: black;
+  padding: 20px 0px;
+}
