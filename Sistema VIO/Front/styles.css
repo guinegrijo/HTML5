@@ -126,3 +126,43 @@ footer {
   color: black;
   padding: 20px 0px;
 }
+
+#user-list-tabela td {
+  list-style-type: none;
+  width: 100%;
+  background-color: pink;
+  text-align: center;
+  font-size: 18px;
+  color: black;
+  padding: 20px 10px;
+  border-radius: 10px;
+}
+
+#user-table thead {
+  background-color: pink;
+}
+
+#user-table thead th {
+ padding: 20px 0px;
+ border-radius: 10px;
+}
+
+#org-list-tabela td {
+  list-style-type: none;
+  width: 100%;
+  background-color: pink;
+  text-align: center;
+  font-size: 18px;
+  color: black;
+  padding: 20px 10px;
+  border-radius: 10px;
+}
+
+#org-table thead {
+  background-color: pink;
+}
+
+#org-table thead th {
+ padding: 20px 0px;
+ border-radius: 10px;
+}
