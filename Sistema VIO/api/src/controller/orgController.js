@@ -81,7 +81,7 @@ module.exports = class orgController {
           .json({ error: "Todos os campos devem ser preenchidos." });
     }
   
-    const query = "UPDATE organizador SET nome = ?, email = ?, senha = ?, telefone = ? WHERE id_organizador = ?"
+    const query = `UPDATE organizador SET nome = ?, email = ?, senha = ?, telefone = ? WHERE id_organizador = ?`
     const values = [nome, email, senha, telefone, id]
 
     try {
