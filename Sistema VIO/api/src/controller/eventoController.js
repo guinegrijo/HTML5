@@ -91,4 +91,30 @@ module.exports = class eventoController {
         return res.status(500).json({ error: "Erro ao criar o evento" });
       }
   }
-};
+
+    static async deleteEvento(req, res) {
+        const idEvento = req.params.id
+        const query = 'DELETE from evento WHERE id_evento = ?'
+        const values = [idEvento]
+
+        try {
+        connect.query (query, values, function(err, results){
+            if(err) {
+            console.error(err)
+            return res.status(500).json({error: "Erro interno do servidor"})
+            }
+
+            if(results.affectedRows === 0) {
+            return res.status(404).json({error: "Evento não encontrado"})
+            }
+
+            return res.status(200).json({message: "Evento excluido com sucesso"})
+
+        })
+        } 
+        catch(error) {
+            console.error(error)
+            return res.status(500).json({error: "Erro interno do servidor"})
+        }
+    }
+}
