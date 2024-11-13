@@ -117,4 +117,81 @@ module.exports = class eventoController {
             return res.status(500).json({error: "Erro interno do servidor"})
         }
     }
+
+    static async getEventosPorData(req, res) {
+      const query = `SELECT * FROM evento`
+
+      try {
+        connect.query(query, (err,results)=>{
+          if(err){
+            console.error(err)
+            return res.status(500).json({error: "Erro ao buscar eventos"})
+          }
+
+          const datasEvento = new Date(results[0].data_hora)
+          const dia = datasEvento.getDate()
+          const mes = datasEvento.getMonth()
+          const ano = datasEvento.getFullYear()
+          console.log(`${dia}/ ${mes}/ ${ano}`)
+
+          const now = new Date()
+          const eventosPassados = results.filter(evento => new Date(evento.data_hora) < now)
+          const eventosFuturos = results.filter(evento => new Date(evento.data_hora) >= now)
+        
+
+          const diferencaMs = eventosFuturos[0].data_hora.getTime() - now.getTime()
+          const dias = Math.floor( diferencaMs / (1000 * 60 * 60 * 24) )
+          const horas = Math.floor( diferencaMs % (1000 * 60 * 60 * 24)/(1000 * 60 * 60))
+          console.log(diferencaMs, `Falta ${dias} dias e ${horas} horas`)
+
+          const dataFiltro = new Date('2024-12-15').toISOString().split('T')
+          const eventosDias = results.filter(evento => new Date(evento.data_hora).toISOString().split("T")[0] === dataFiltro[0])
+
+          console.log("Eventos: ", eventosDias)
+
+          return res.status(200).json({message: "OK", eventosPassados, eventosFuturos})
+        })
+        
+      } catch(error){
+        console.error(error)
+        return res.status(500).json({error: "Erro ao buscar eventos"})
+      }
+
+    }
+
+    static async EventosSemana(req, res) {
+      const { data } = req.params // 2024-10-01    
+  
+      const dataInicio = new Date(data)
+      const dataFim = new Date(dataInicio)
+      dataFim.setDate(dataFim.getDate() + 6) // Adicionando 6 dias para os próximos 6 dias
+    
+      const query = "SELECT * FROM evento"
+    
+      try {
+        connect.query(query, (err, results) => {
+          if (err) {
+            console.error(err)
+            return res.status(500).json({ error: "Erro ao buscar eventos" })
+          }
+    
+          const eventosSemana = results.filter((evento) => {
+            const datasEventos = new Date(evento.data_hora) // pega todas as datas do banco
+            return datasEventos >= dataInicio && datasEventos <= dataFim  // seja entre dataInicio e dataFim
+          })
+    
+          return res.status(200).json({
+            message: "Eventos encontrados",
+            dataInicio: dataInicio.toISOString().split("T")[0],
+            dataFim: dataFim.toISOString().split("T")[0],
+            eventos: eventosSemana,
+          })
+
+        })
+      } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Erro ao buscar eventos" })
+      }
+    }
+    
 }
