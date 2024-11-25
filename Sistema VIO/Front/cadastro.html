@@ -53,6 +53,8 @@
                 <!-- Entrada do email -->
                 <label for="senha">Senha:</label>
                 <input type="password" id="senha" name="senha" required />
+                <label for="data">Data de nascimento: </label>
+                <input type="date" id="data" name="data" required>
                 <!-- Botão para enviar formulário -->
                 <input type="submit" value="Cadastrar" />
             </form>
@@ -63,20 +65,21 @@
             <ul id="user-list"></ul>
         </section>
 
-        <!-- <section>
+        <section>
             <h2>Usuário Cadastrados via Tabela</h2>
             <table id="user-table">
                 <thead>
                     <th>Nome</th>
                     <th>CPF</th>
                     <th>E-mail</th>
+                    <th>Data de nascimento</th>
                 </thead>
 
                 <tbody id="user-list-tabela">
 
                 </tbody>
             </table>
-        </section> -->
+        </section>
 
         <section>
             <h2>Organizador Cadastrados via Tabela</h2>
@@ -103,7 +106,7 @@
             alert("Olá! Você clicou no botão!");
         }
     </script>
-    <script src=".js"></script>
+    <script src="appUser.js"></script>
 </body>
 
 </html>
